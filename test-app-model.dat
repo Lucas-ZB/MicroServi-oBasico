@@ -1,0 +1,62 @@
+package edu.ifrs;
+
+import edu.ifrs.model.Book;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
+@Path("/books")
+public class BookResource {
+
+    @GET
+    @Path("/add/{title}/{year}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Book addBook(@PathParam("title") String title,
+                    @PathParam("year") String year){
+
+        Book book = new Book();
+        book.setTitle(title);
+        book.setYear(year);
+
+        return book;
+    }
+
+    @POST
+    @Path("/addBookForm")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Book addBookForm(@FormParam("title") String title,
+                    @FormParam("year") String year){
+
+        Book book = new Book();
+        book.setTitle(title);
+        book.setYear(year);
+
+        return book;
+    }
+
+    @POST
+    @Path("/addBookJSON")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Book addBookJSON(Book book){
+        return book;
+    }
+
+
+
+    @Path("/remove")
+    @POST
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String removeBook(){
+        return "hello";
+    }
+  
+}
